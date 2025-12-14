@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CBLE7QXF2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CBLE7QXF2');
+</script>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Withholding Calculator - Estimate Paycheck Tax | Taxes Calculator</title>
+    <meta name="description" content="Free Tax Withholding calculator. Estimate federal and state income tax withholding from your paycheck.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/withholding-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Tax Withholding Calculator",
+      "url": "https://payroll-calculator.github.io/withholding-calculator.html",
+      "description": "Estimate tax withholding from paycheck",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>Payroll Calculator</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">TAX WITHHOLDING CALCULATOR</h1>
+                <p class="calculator-description">
+                    Estimate federal and state income tax withholding for your paycheck based on your W-4.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="grossPay">GROSS PAY ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="grossPay" 
+                                placeholder="3000" 
+                                min="0" 
+                                step="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="w4FilingStatus">W-4 FILING STATUS</label>
+                            <select class="form-select" id="w4FilingStatus" required>
+                                <option value="single">Single / Married Filing Separately</option>
+                                <option value="married">Married Filing Jointly</option>
+                                <option value="hoh">Head of Household</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="extraWithholding">EXTRA WITHHOLDING ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="extraWithholding" 
+                                placeholder="0" 
+                                min="0" 
+                                step="10"
+                                value="0"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE WITHHOLDING</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">WITHHOLDING RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">ESTIMATED FEDERAL WITHHOLDING</div>
+                        <div class="result-value" id="federalWithholding">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">ESTIMATED STATE WITHHOLDING</div>
+                        <div class="result-value" id="stateWithholding">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">TOTAL WITHHELD TAX</div>
+                        <div class="result-value" id="totalWithheldTax">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">BREAKDOWN</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Gross Pay</span>
+                            <span class="breakdown-value" id="grossPayResult">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Estimated Annual Tax</span>
+                            <span class="breakdown-value" id="annualTaxEstimate">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Net Pay After Withholding</span>
+                            <span class="breakdown-value" id="netPayAfterWithholding">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateTaxWithholding() {
+            // Placeholder for tax withholding calculation logic
+            const grossPay = parseFloat(document.getElementById('grossPay').value) || 0;
+            const extraWithholding = parseFloat(document.getElementById('extraWithholding').value) || 0;
+            const filingStatus = document.getElementById('w4FilingStatus').value;
+
+            // Mock calculations for demonstration
+            const federalRate = 0.15; // Example federal rate
+            const stateRate = 0.05; // Example state rate
+            
+            const federalWithholding = (grossPay * federalRate) + extraWithholding;
+            const stateWithholding = grossPay * stateRate;
+            const totalWithheldTax = federalWithholding + stateWithholding;
+            const netPay = grossPay - totalWithheldTax;
+
+            // Display mock results
+            displayResult('federalWithholding', formatCurrency(federalWithholding));
+            displayResult('stateWithholding', formatCurrency(stateWithholding));
+            displayResult('totalWithheldTax', formatCurrency(totalWithheldTax));
+            displayResult('grossPayResult', formatCurrency(grossPay));
+            displayResult('annualTaxEstimate', formatCurrency(federalWithholding * 26)); // Bi-weekly example
+            displayResult('netPayAfterWithholding', formatCurrency(netPay));
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateTaxWithholding);
+
+        // Initial calculation
+        if (document.getElementById('grossPay').value) {
+            calculateTaxWithholding();
+        }
+    </script>
+</body>
+</html>
