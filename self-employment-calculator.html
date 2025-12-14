@@ -17,13 +17,48 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Self-Employment Tax Calculator",
-      "url": "https://payroll-calculator.github.io/self-employment-calculator.html",
-      "description": "Calculate self-employment tax for freelancers",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Self-Employment Tax Calculator",
+  "url": "https://payroll-calculator.github.io/self-employment-calculator.html",
+  "description": "Free Self-Employment tax calculator. Estimate self-employment tax (Social Security and Medicare) for freelancers and independent contractors.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/self-employment-calculator.html?netEarnings={netEarnings}&w2Wages={w2Wages}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate self-employment tax for net earnings of ${netEarnings} with W-2 wages of ${w2Wages}",
+    "query-input": [
+      "required name=netEarnings",
+      "required name=w2Wages"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
