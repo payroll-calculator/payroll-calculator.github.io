@@ -17,13 +17,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Estimated Tax Calculator",
-      "url": "https://payroll-calculator.github.io/estimated-tax-calculator.html",
-      "description": "Calculate quarterly estimated tax payments",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Estimated Tax Calculator",
+  "url": "https://payroll-calculator.github.io/estimated-tax-calculator.html",
+  "description": "Free Estimated Tax calculator. Calculate quarterly estimated tax payments for self-employed individuals and those with significant unwithheld income.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/estimated-tax-calculator.html?income={estimatedAnnualIncome}&credits={taxCredits}&withholding={annualWithholding}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate quarterly estimated tax for ${estimatedAnnualIncome} income with ${annualWithholding} withheld and ${taxCredits} in credits",
+    "query-input": [
+      "required name=estimatedAnnualIncome",
+      "required name=taxCredits",
+      "required name=annualWithholding"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
