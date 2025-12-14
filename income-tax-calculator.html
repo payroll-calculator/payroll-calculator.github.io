@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tax Calculator - Calculate Federal & State Income Tax | Taxes Calculator</title>
+    <meta name="description" content="Free income tax calculator. Estimate your federal and state income tax based on your earnings, filing status, and deductions. Get accurate results instantly.">
+    <meta name="keywords" content="income tax calculator, federal tax calculator, state tax calculator, tax estimator">
+    <link rel="canonical" href="https://payroll-calculator.github.io/income-tax-calculator.html">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Income Tax Calculator",
+      "url": "https://payroll-calculator.github.io/income-tax-calculator.html",
+      "description": "Calculate federal and state income tax based on earnings, filing status, and deductions",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>TAXES CALC</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">INCOME TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Calculate your estimated federal and state income tax based on your annual income, filing status, and deductions. Get instant results with detailed breakdown.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="annualIncome">ANNUAL INCOME ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="annualIncome" 
+                                placeholder="75000" 
+                                min="0" 
+                                step="1000"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="filingStatus">FILING STATUS</label>
+                            <select class="form-select" id="filingStatus" required>
+                                <option value="single">Single</option>
+                                <option value="married-joint">Married Filing Jointly</option>
+                                <option value="married-separate">Married Filing Separately</option>
+                                <option value="head">Head of Household</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="deductions">DEDUCTIONS ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="deductions" 
+                                placeholder="13850" 
+                                min="0" 
+                                step="100"
+                                value="13850"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="stateRate">STATE TAX RATE (%)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="stateRate" 
+                                placeholder="5" 
+                                min="0" 
+                                max="15" 
+                                step="0.1"
+                                value="5"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">YOUR TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">TOTAL TAX OWED</div>
+                        <div class="result-value" id="totalTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">EFFECTIVE TAX RATE</div>
+                        <div class="result-value" id="effectiveRate">0.00%</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">NET INCOME</div>
+                        <div class="result-value" id="netIncome">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">BREAKDOWN</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Gross Income</span>
+                            <span class="breakdown-value" id="grossIncome">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Deductions</span>
+                            <span class="breakdown-value" id="totalDeductions">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Taxable Income</span>
+                            <span class="breakdown-value" id="taxableIncome">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Federal Tax</span>
+                            <span class="breakdown-value" id="federalTax">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">State Tax</span>
+                            <span class="breakdown-value" id="stateTax">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 2024 Federal Tax Brackets (Single Filer - simplified)
+        const federalBrackets = {
+            single: [
+                { limit: 11600, rate: 0.10 },
+                { limit: 47150, rate: 0.12 },
+                { limit: 100525, rate: 0.22 },
+                { limit: 191950, rate: 0.24 },
+                { limit: 243725, rate: 0.32 },
+                { limit: 609350, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            'married-joint': [
+                { limit: 23200, rate: 0.10 },
+                { limit: 94300, rate: 0.12 },
+                { limit: 201050, rate: 0.22 },
+                { limit: 383900, rate: 0.24 },
+                { limit: 487450, rate: 0.32 },
+                { limit: 731200, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            'married-separate': [
+                { limit: 11600, rate: 0.10 },
+                { limit: 47150, rate: 0.12 },
+                { limit: 100525, rate: 0.22 },
+                { limit: 191950, rate: 0.24 },
+                { limit: 243725, rate: 0.32 },
+                { limit: 365600, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            head: [
+                { limit: 16550, rate: 0.10 },
+                { limit: 63100, rate: 0.12 },
+                { limit: 100500, rate: 0.22 },
+                { limit: 191950, rate: 0.24 },
+                { limit: 243700, rate: 0.32 },
+                { limit: 609350, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ]
+        };
+
+        function calculateFederalTax(taxableIncome, filingStatus) {
+            const brackets = federalBrackets[filingStatus];
+            let tax = 0;
+            let previousLimit = 0;
+
+            for (let bracket of brackets) {
+                if (taxableIncome > previousLimit) {
+                    const taxableInBracket = Math.min(taxableIncome, bracket.limit) - previousLimit;
+                    tax += taxableInBracket * bracket.rate;
+                    previousLimit = bracket.limit;
+                } else {
+                    break;
+                }
+            }
+
+            return tax;
+        }
+
+        function calculateIncomeTax() {
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 0;
+            const filingStatus = document.getElementById('filingStatus').value;
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+            const stateRate = parseFloat(document.getElementById('stateRate').value) || 0;
+
+            // Calculate taxable income
+            const taxableIncome = Math.max(0, annualIncome - deductions);
+
+            // Calculate federal tax
+            const federalTax = calculateFederalTax(taxableIncome, filingStatus);
+
+            // Calculate state tax
+            const stateTax = taxableIncome * (stateRate / 100);
+
+            // Total tax
+            const totalTax = federalTax + stateTax;
+
+            // Effective tax rate
+            const effectiveRate = annualIncome > 0 ? (totalTax / annualIncome) * 100 : 0;
+
+            // Net income
+            const netIncome = annualIncome - totalTax;
+
+            // Display results
+            displayResult('totalTax', formatCurrency(totalTax));
+            displayResult('effectiveRate', formatPercentage(effectiveRate));
+            displayResult('netIncome', formatCurrency(netIncome));
+            displayResult('grossIncome', formatCurrency(annualIncome));
+            displayResult('totalDeductions', formatCurrency(deductions));
+            displayResult('taxableIncome', formatCurrency(taxableIncome));
+            displayResult('federalTax', formatCurrency(federalTax));
+            displayResult('stateTax', formatCurrency(stateTax));
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateIncomeTax);
+
+        // Initial calculation
+        if (document.getElementById('annualIncome').value) {
+            calculateIncomeTax();
+        }
+    </script>
+</body>
+</html>

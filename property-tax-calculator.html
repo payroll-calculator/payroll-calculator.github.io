@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Tax Calculator - Estimate Annual Property Tax | Taxes Calculator</title>
+    <meta name="description" content="Free property tax calculator. Estimate your annual property tax based on home value and local tax rates.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/property-tax-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Property Tax Calculator",
+      "url": "https://payroll-calculator.github.io/property-tax-calculator.html",
+      "description": "Calculate annual property tax based on home value and tax rates",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>TAXES CALC</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">PROPERTY TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Estimate your annual property tax based on your home's assessed value and local tax rate. Calculate monthly and yearly property tax payments.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="homeValue">HOME VALUE ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="homeValue" 
+                                placeholder="350000" 
+                                min="0" 
+                                step="10000"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="assessmentRatio">ASSESSMENT RATIO (%)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="assessmentRatio" 
+                                placeholder="100" 
+                                min="0" 
+                                max="100" 
+                                step="1"
+                                value="100"
+                            >
+                            <small style="color: var(--text-secondary); font-size: 12px; margin-top: 5px; display: block;">
+                                Some areas assess homes at less than market value
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="taxRate">TAX RATE (per $1,000)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="taxRate" 
+                                placeholder="12.50" 
+                                min="0" 
+                                max="100" 
+                                step="0.01"
+                                required
+                            >
+                            <small style="color: var(--text-secondary); font-size: 12px; margin-top: 5px; display: block;">
+                                Or enter property tax percentage below
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="taxPercent">TAX RATE (%)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="taxPercent" 
+                                placeholder="1.25" 
+                                min="0" 
+                                max="10" 
+                                step="0.01"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE PROPERTY TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">PROPERTY TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">ANNUAL PROPERTY TAX</div>
+                        <div class="result-value" id="annualTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">MONTHLY PAYMENT</div>
+                        <div class="result-value" id="monthlyTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">EFFECTIVE TAX RATE</div>
+                        <div class="result-value" id="effectiveRate">0.00%</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">BREAKDOWN</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Home Value</span>
+                            <span class="breakdown-value" id="displayHomeValue">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Assessment Ratio</span>
+                            <span class="breakdown-value" id="displayAssessment">100%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Assessed Value</span>
+                            <span class="breakdown-value" id="assessedValue">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Annual Tax</span>
+                            <span class="breakdown-value" id="yearlyTax">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Monthly Escrow</span>
+                            <span class="breakdown-value" id="monthlyEscrow">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Update tax rate when percentage is entered
+        document.getElementById('taxPercent').addEventListener('input', function() {
+            if (this.value) {
+                const percent = parseFloat(this.value);
+                const per1000 = percent * 10;
+                document.getElementById('taxRate').value = per1000.toFixed(2);
+            }
+        });
+
+        // Update percentage when tax rate per 1000 is entered
+        document.getElementById('taxRate').addEventListener('input', function() {
+            if (this.value) {
+                const per1000 = parseFloat(this.value);
+                const percent = per1000 / 10;
+                document.getElementById('taxPercent').value = percent.toFixed(3);
+            }
+        });
+
+        function calculatePropertyTax() {
+            const homeValue = parseFloat(document.getElementById('homeValue').value) || 0;
+            const assessmentRatio = parseFloat(document.getElementById('assessmentRatio').value) || 100;
+            let taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            
+            // Use percentage if provided instead
+            const taxPercent = parseFloat(document.getElementById('taxPercent').value);
+            if (taxPercent) {
+                taxRate = taxPercent * 10;
+            }
+
+            // Calculate assessed value
+            const assessedValue = homeValue * (assessmentRatio / 100);
+
+            // Calculate annual tax
+            const annualTax = (assessedValue / 1000) * taxRate;
+
+            // Calculate monthly payment
+            const monthlyTax = annualTax / 12;
+
+            // Calculate effective tax rate
+            const effectiveRate = homeValue > 0 ? (annualTax / homeValue) * 100 : 0;
+
+            // Display results
+            displayResult('annualTax', formatCurrency(annualTax));
+            displayResult('monthlyTax', formatCurrency(monthlyTax));
+            displayResult('effectiveRate', formatPercentage(effectiveRate));
+            displayResult('displayHomeValue', formatCurrency(homeValue));
+            displayResult('displayAssessment', formatPercentage(assessmentRatio));
+            displayResult('assessedValue', formatCurrency(assessedValue));
+            displayResult('yearlyTax', formatCurrency(annualTax));
+            displayResult('monthlyEscrow', formatCurrency(monthlyTax));
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculatePropertyTax);
+
+        // Initial calculation
+        if (document.getElementById('homeValue').value) {
+            calculatePropertyTax();
+        }
+    </script>
+</body>
+</html>

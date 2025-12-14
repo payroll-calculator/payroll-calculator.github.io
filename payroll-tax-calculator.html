@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Tax Calculator - Calculate Employer & Employee Taxes | Taxes Calculator</title>
+    <meta name="description" content="Free payroll tax calculator. Estimate employer and employee payroll taxes including Social Security, Medicare, and unemployment taxes.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/payroll-tax-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Payroll Tax Calculator",
+      "url": "https://payroll-calculator.github.io/payroll-tax-calculator.html",
+      "description": "Calculate employer and employee payroll taxes including Social Security and Medicare",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>TAXES CALC</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">PAYROLL TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Calculate employer and employee payroll taxes including Social Security, Medicare, and unemployment taxes. Get a complete breakdown of all payroll tax obligations.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="grossPay">GROSS PAY ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="grossPay" 
+                                placeholder="5000" 
+                                min="0" 
+                                step="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="payPeriod">PAY PERIOD</label>
+                            <select class="form-select" id="payPeriod" required>
+                                <option value="weekly">Weekly</option>
+                                <option value="biweekly" selected>Bi-Weekly</option>
+                                <option value="semimonthly">Semi-Monthly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="ytdEarnings">YEAR-TO-DATE EARNINGS ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="ytdEarnings" 
+                                placeholder="50000" 
+                                min="0" 
+                                step="1000"
+                                value="0"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE PAYROLL TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">PAYROLL TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">TOTAL EMPLOYEE TAX</div>
+                        <div class="result-value" id="totalEmployeeTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">TOTAL EMPLOYER TAX</div>
+                        <div class="result-value" id="totalEmployerTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">NET PAY</div>
+                        <div class="result-value" id="netPay">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">EMPLOYEE TAXES</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Social Security (6.2%)</span>
+                            <span class="breakdown-value" id="employeeSS">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Medicare (1.45%)</span>
+                            <span class="breakdown-value" id="employeeMedicare">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Additional Medicare (0.9%)</span>
+                            <span class="breakdown-value" id="additionalMedicare">$0.00</span>
+                        </div>
+                        
+                        <h3 style="margin: 30px 0 20px; font-weight: 900;">EMPLOYER TAXES</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Social Security (6.2%)</span>
+                            <span class="breakdown-value" id="employerSS">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Medicare (1.45%)</span>
+                            <span class="breakdown-value" id="employerMedicare">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">FUTA (0.6%)</span>
+                            <span class="breakdown-value" id="futa">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 2024 Tax rates and limits
+        const SS_RATE = 0.062; // 6.2%
+        const MEDICARE_RATE = 0.0145; // 1.45%
+        const ADDITIONAL_MEDICARE_RATE = 0.009; // 0.9%
+        const ADDITIONAL_MEDICARE_THRESHOLD = 200000;
+        const SS_WAGE_BASE = 168600; // 2024 limit
+        const FUTA_RATE = 0.006; // 0.6%
+        const FUTA_WAGE_BASE = 7000;
+
+        function calculatePayrollTax() {
+            const grossPay = parseFloat(document.getElementById('grossPay').value) || 0;
+            const ytdEarnings = parseFloat(document.getElementById('ytdEarnings').value) || 0;
+
+            // Calculate Social Security (capped at wage base)
+            let employeeSS = 0;
+            let employerSS = 0;
+            
+            if (ytdEarnings < SS_WAGE_BASE) {
+                const ssWages = Math.min(grossPay, SS_WAGE_BASE - ytdEarnings);
+                employeeSS = ssWages * SS_RATE;
+                employerSS = ssWages * SS_RATE;
+            }
+
+            // Calculate Medicare (no cap)
+            const employeeMedicare = grossPay * MEDICARE_RATE;
+            const employerMedicare = grossPay * MEDICARE_RATE;
+
+            // Calculate Additional Medicare (for high earners)
+            let additionalMedicare = 0;
+            if (ytdEarnings + grossPay > ADDITIONAL_MEDICARE_THRESHOLD) {
+                const excessWages = Math.max(0, (ytdEarnings + grossPay) - ADDITIONAL_MEDICARE_THRESHOLD);
+                const currentExcess = Math.min(grossPay, excessWages);
+                additionalMedicare = currentExcess * ADDITIONAL_MEDICARE_RATE;
+            }
+
+            // Calculate FUTA (employer only, capped)
+            let futa = 0;
+            if (ytdEarnings < FUTA_WAGE_BASE) {
+                const futaWages = Math.min(grossPay, FUTA_WAGE_BASE - ytdEarnings);
+                futa = futaWages * FUTA_RATE;
+            }
+
+            // Totals
+            const totalEmployeeTax = employeeSS + employeeMedicare + additionalMedicare;
+            const totalEmployerTax = employerSS + employerMedicare + futa;
+            const netPay = grossPay - totalEmployeeTax;
+
+            // Display results
+            displayResult('totalEmployeeTax', formatCurrency(totalEmployeeTax));
+            displayResult('totalEmployerTax', formatCurrency(totalEmployerTax));
+            displayResult('netPay', formatCurrency(netPay));
+            displayResult('employeeSS', formatCurrency(employeeSS));
+            displayResult('employeeMedicare', formatCurrency(employeeMedicare));
+            displayResult('additionalMedicare', formatCurrency(additionalMedicare));
+            displayResult('employerSS', formatCurrency(employerSS));
+            displayResult('employerMedicare', formatCurrency(employerMedicare));
+            displayResult('futa', formatCurrency(futa));
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculatePayrollTax);
+
+        // Initial calculation
+        if (document.getElementById('grossPay').value) {
+            calculatePayrollTax();
+        }
+    </script>
+</body>
+</html>
