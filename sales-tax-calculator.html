@@ -19,13 +19,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Sales Tax Calculator",
-      "url": "https://payroll-calculator.github.io/sales-tax-calculator.html",
-      "description": "Calculate sales tax for purchases - add or remove tax from prices",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sales Tax Calculator",
+  "url": "https://payroll-calculator.github.io/sales-tax-calculator.html",
+  "description": "Free sales tax calculator. Calculate sales tax for any purchase amount. Add or remove tax from prices instantly.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/sales-tax-calculator.html?type={calculationType}&amount={amount}&rate={taxRate}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate sales tax on ${amount} at a rate of {taxRate}% where calculation type is {calculationType}",
+    "query-input": [
+      "required name=calculationType",
+      "required name=amount",
+      "required name=taxRate"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
