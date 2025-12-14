@@ -17,13 +17,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Capital Gains Tax Calculator",
-      "url": "https://payroll-calculator.github.io/capital-gains-calculator.html",
-      "description": "Calculate tax on investment profits",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Capital Gains Tax Calculator",
+  "url": "https://payroll-calculator.github.io/capital-gains-calculator.html",
+  "description": "Free Capital Gains tax calculator. Estimate tax on short-term and long-term investment profits.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/capital-gains-calculator.html?short_term_gain={shortTermGain}&long_term_gain={longTermGain}&income={taxableIncome}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate capital gains tax for a total gain of ${shortTermGain} short-term and ${longTermGain} long-term with ${taxableIncome} of other income",
+    "query-input": [
+      "required name=shortTermGain",
+      "required name=longTermGain",
+      "required name=taxableIncome"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
