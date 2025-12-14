@@ -17,13 +17,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Tax Withholding Calculator",
-      "url": "https://payroll-calculator.github.io/withholding-calculator.html",
-      "description": "Estimate tax withholding from paycheck",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tax Withholding Calculator",
+  "url": "https://payroll-calculator.github.io/withholding-calculator.html",
+  "description": "Free Tax Withholding calculator. Estimate federal and state income tax withholding from your paycheck.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/withholding-calculator.html?grossPay={grossPay}&status={w4FilingStatus}&extra={extraWithholding}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate tax withholding for a gross pay of ${grossPay} with filing status {w4FilingStatus} and extra withholding of ${extraWithholding}",
+    "query-input": [
+      "required name=grossPay",
+      "required name=w4FilingStatus",
+      "required name=extraWithholding"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
