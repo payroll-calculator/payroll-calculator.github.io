@@ -19,13 +19,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Property Tax Calculator",
-      "url": "https://payroll-calculator.github.io/property-tax-calculator.html",
-      "description": "Calculate annual property tax based on home value and tax rates",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Property Tax Calculator",
+  "url": "https://payroll-calculator.github.io/property-tax-calculator.html",
+  "description": "Free property tax calculator. Estimate your annual property tax based on home value and local tax rates.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/property-tax-calculator.html?value={homeValue}&ratio={assessmentRatio}&rate={taxRate}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate property tax for a home valued at ${homeValue} with an assessment ratio of {assessmentRatio}% and a tax rate of ${taxRate} per $1000",
+    "query-input": [
+      "required name=homeValue",
+      "required name=assessmentRatio",
+      "required name=taxRate"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
