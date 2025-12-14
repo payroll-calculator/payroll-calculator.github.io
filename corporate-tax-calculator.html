@@ -17,13 +17,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Corporate Tax Calculator",
-      "url": "https://payroll-calculator.github.io/corporate-tax-calculator.html",
-      "description": "Estimate corporate income tax obligations",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Corporate Tax Calculator",
+  "url": "https://payroll-calculator.github.io/corporate-tax-calculator.html",
+  "description": "Free Corporate Tax calculator. Estimate federal corporate income tax obligations based on taxable business income.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/corporate-tax-calculator.html?income={taxableIncome}&state_rate={stateTaxRate}&year={taxYear}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate corporate tax for a taxable income of ${taxableIncome} at a state rate of {stateTaxRate}% for the {taxYear} tax year",
+    "query-input": [
+      "required name=taxableIncome",
+      "required name=stateTaxRate",
+      "required name=taxYear"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
