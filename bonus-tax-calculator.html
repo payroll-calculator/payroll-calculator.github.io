@@ -17,13 +17,37 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Bonus Tax Calculator",
-      "url": "https://payroll-calculator.github.io/bonus-tax-calculator.html",
-      "description": "Estimate tax on bonus and supplemental income",
-      "applicationCategory": "FinanceApplication"
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bonus Tax Calculator",
+  "url": "https://payroll-calculator.github.io/bonus-tax-calculator.html",
+  "description": "Free Bonus Tax calculator. Estimate federal income tax withholding on bonus and supplemental income using the percentage or aggregate method.",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "CalculateAction",
+    "name": "Calculate Bonus Tax",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/bonus-tax-calculator.html",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "result": {
+      "@type": "Thing",
+      "name": "Federal Income Tax Withheld, Social Security Tax, Medicare Tax, Net Bonus After Taxes"
     }
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+    // Assuming 'Taxes Calculator' is the brand/organization behind the site
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
