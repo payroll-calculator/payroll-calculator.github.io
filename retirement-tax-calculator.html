@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CBLE7QXF2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CBLE7QXF2');
+</script>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Tax Calculator - Calculate Tax on IRA/401k Withdrawals | Taxes Calculator</title>
+    <meta name="description" content="Free Retirement Tax calculator. Estimate income tax and early withdrawal penalties on distributions from retirement accounts (IRA, 401k).">
+    <link rel="canonical" href="https://payroll-calculator.github.io/retirement-tax-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Retirement Tax Calculator",
+      "url": "https://payroll-calculator.github.io/retirement-tax-calculator.html",
+      "description": "Calculate tax on retirement account withdrawals",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>Payroll Calculator</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">RETIREMENT TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Estimate the income tax and penalty on withdrawals from traditional retirement accounts.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="withdrawalAmount">TRADITIONAL ACCOUNT WITHDRAWAL AMOUNT ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="withdrawalAmount" 
+                                placeholder="5000" 
+                                min="0" 
+                                step="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="taxBracket">FEDERAL INCOME TAX BRACKET (%)</label>
+                            <select class="form-select" id="taxBracket" required>
+                                <option value="10">10%</option>
+                                <option value="12" selected>12%</option>
+                                <option value="22">22%</option>
+                                <option value="24">24%</option>
+                                <option value="32">32%</option>
+                                <option value="35">35%</option>
+                                <option value="37">37%</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="under59">ARE YOU UNDER 59.5 YEARS OLD?</label>
+                            <select class="form-select" id="under59" required>
+                                <option value="no" selected>No (Over 59.5)</option>
+                                <option value="yes">Yes (Under 59.5 - Penalty Applies)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE RETIREMENT TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">RETIREMENT WITHDRAWAL RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">ESTIMATED INCOME TAX</div>
+                        <div class="result-value" id="incomeTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">EARLY WITHDRAWAL PENALTY (10%)</div>
+                        <div class="result-value" id="penaltyTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">TOTAL TAX AND PENALTY</div>
+                        <div class="result-value" id="totalRetirementTax">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">BREAKDOWN</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Net Withdrawal After Tax/Penalty</span>
+                            <span class="breakdown-value" id="netWithdrawal">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Income Tax Rate Used</span>
+                            <span class="breakdown-value" id="rateUsed">12%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateRetirementTax() {
+            // Placeholder for retirement tax calculation logic
+            const withdrawalAmount = parseFloat(document.getElementById('withdrawalAmount').value) || 0;
+            const taxBracket = parseFloat(document.getElementById('taxBracket').value) / 100;
+            const under59 = document.getElementById('under59').value;
+
+            // Mock calculations for demonstration
+            const incomeTax = withdrawalAmount * taxBracket;
+            const penalty = under59 === 'yes' ? withdrawalAmount * 0.10 : 0;
+            const totalTax = incomeTax + penalty;
+            const netWithdrawal = withdrawalAmount - totalTax;
+
+            // Display mock results
+            displayResult('incomeTax', formatCurrency(incomeTax));
+            displayResult('penaltyTax', formatCurrency(penalty));
+            displayResult('totalRetirementTax', formatCurrency(totalTax));
+            displayResult('netWithdrawal', formatCurrency(netWithdrawal));
+            displayResult('rateUsed', (taxBracket * 100) + '%');
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateRetirementTax);
+
+        // Initial calculation
+        if (document.getElementById('withdrawalAmount').value) {
+            calculateRetirementTax();
+        }
+    </script>
+</body>
+</html>
