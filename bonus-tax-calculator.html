@@ -27,25 +27,24 @@
   "softwareRequirements": "Web browser",
   "inLanguage": "en",
   "potentialAction": {
-    "@type": "CalculateAction",
-    "name": "Calculate Bonus Tax",
+    "@type": "SearchAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://payroll-calculator.github.io/bonus-tax-calculator.html",
+      "urlTemplate": "https://payroll-calculator.github.io/bonus-tax-calculator.html?bonus={bonus_amount}&method={withholding_method}",
       "actionPlatform": [
         "https://schema.org/DesktopWebPlatform",
         "https://schema.org/MobileWebPlatform"
       ]
     },
-    "result": {
-      "@type": "Thing",
-      "name": "Federal Income Tax Withheld, Social Security Tax, Medicare Tax, Net Bonus After Taxes"
-    }
+    "query": "Calculate bonus tax for ${bonus_amount} using the {withholding_method} method",
+    "query-input": [
+      "required name=bonus_amount",
+      "required name=withholding_method"
+    ]
   },
   "creator": {
     "@type": "Organization",
     "name": "Taxes Calculator"
-    // Assuming 'Taxes Calculator' is the brand/organization behind the site
   }
 }
     </script>
