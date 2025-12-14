@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CBLE7QXF2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CBLE7QXF2');
+</script>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Tax Calculator - Estimate Business Income Tax | Taxes Calculator</title>
+    <meta name="description" content="Free Corporate Tax calculator. Estimate federal corporate income tax obligations based on taxable business income.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/corporate-tax-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Corporate Tax Calculator",
+      "url": "https://payroll-calculator.github.io/corporate-tax-calculator.html",
+      "description": "Estimate corporate income tax obligations",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>Payroll Calculator</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">CORPORATE TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Estimate federal corporate income tax obligations based on your taxable business income.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="taxableIncome">TAXABLE CORPORATE INCOME ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="taxableIncome" 
+                                placeholder="100000" 
+                                min="0" 
+                                step="1000"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="taxYear">TAX YEAR</label>
+                            <select class="form-select" id="taxYear" required>
+                                <option value="2024" selected>2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="stateTaxRate">STATE CORPORATE TAX RATE (%)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="stateTaxRate" 
+                                placeholder="5" 
+                                min="0" 
+                                max="20"
+                                step="0.1"
+                                value="0"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE CORPORATE TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">CORPORATE TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">FEDERAL CORPORATE TAX (21%)</div>
+                        <div class="result-value" id="federalCorporateTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">ESTIMATED STATE CORPORATE TAX</div>
+                        <div class="result-value" id="stateCorporateTax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">TOTAL CORPORATE TAX OBLIGATION</div>
+                        <div class="result-value" id="totalCorporateTax">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">BREAKDOWN</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Taxable Income</span>
+                            <span class="breakdown-value" id="incomeResult">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Effective Federal Rate</span>
+                            <span class="breakdown-value" id="effectiveFederalRate">21.0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateCorporateTax() {
+            // Placeholder for corporate tax calculation logic
+            const taxableIncome = parseFloat(document.getElementById('taxableIncome').value) || 0;
+            const stateRate = parseFloat(document.getElementById('stateTaxRate').value) || 0;
+
+            // Mock calculations for demonstration (assuming 21% flat federal rate)
+            const federalRate = 0.21;
+            const federalTax = taxableIncome * federalRate;
+            const stateTax = taxableIncome * (stateRate / 100);
+            const totalTax = federalTax + stateTax;
+
+            // Display mock results
+            displayResult('federalCorporateTax', formatCurrency(federalTax));
+            displayResult('stateCorporateTax', formatCurrency(stateTax));
+            displayResult('totalCorporateTax', formatCurrency(totalTax));
+            displayResult('incomeResult', formatCurrency(taxableIncome));
+            displayResult('effectiveFederalRate', (federalRate * 100).toFixed(1) + '%');
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateCorporateTax);
+
+        // Initial calculation
+        if (document.getElementById('taxableIncome').value) {
+            calculateCorporateTax();
+        }
+    </script>
+</body>
+</html>
