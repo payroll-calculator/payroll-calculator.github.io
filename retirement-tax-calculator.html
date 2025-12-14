@@ -17,13 +17,49 @@
     
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Retirement Tax Calculator",
-      "url": "https://payroll-calculator.github.io/retirement-tax-calculator.html",
-      "description": "Calculate tax on retirement account withdrawals",
-      "applicationCategory": "FinanceApplication"
-    }
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Retirement Tax Calculator",
+  "url": "https://payroll-calculator.github.io/retirement-tax-calculator.html",
+  "description": "Free Retirement Tax calculator. Estimate income tax and early withdrawal penalties on distributions from retirement accounts (IRA, 401k).",
+  "applicationCategory": "https://schema.org/FinanceApplication",
+  "operatingSystem": "All",
+  "softwareRequirements": "Web browser",
+  "inLanguage": "en",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://payroll-calculator.github.io/retirement-tax-calculator.html?withdrawal={withdrawalAmount}&bracket={taxBracket}&under59={under59}",
+      "actionPlatform": [
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query": "Calculate tax on a retirement withdrawal of ${withdrawalAmount} in the {taxBracket}% bracket, with age status {under59} 59.5",
+    "query-input": [
+      "required name=withdrawalAmount",
+      "required name=taxBracket",
+      "required name=under59"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "category": "Free",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": "false",
+      "eligibleCustomerType": "https://schema.org/AllCustomers"
+    },
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Taxes Calculator"
+  }
+}
     </script>
     
     <link rel="stylesheet" href="styles.css">
