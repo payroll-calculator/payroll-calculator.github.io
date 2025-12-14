@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CBLE7QXF2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CBLE7QXF2');
+</script>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Employment Tax Calculator - Estimate Freelancer Taxes | Taxes Calculator</title>
+    <meta name="description" content="Free Self-Employment tax calculator. Estimate self-employment tax (Social Security and Medicare) for freelancers and independent contractors.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/self-employment-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Self-Employment Tax Calculator",
+      "url": "https://payroll-calculator.github.io/self-employment-calculator.html",
+      "description": "Calculate self-employment tax for freelancers",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>Payroll Calculator</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">SELF-EMPLOYMENT TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Calculate your self-employment tax (Social Security and Medicare) based on your net earnings.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="netEarnings">NET SELF-EMPLOYMENT EARNINGS ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="netEarnings" 
+                                placeholder="40000" 
+                                min="0" 
+                                step="100"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="w2Wages">W-2 WAGES (IF ANY) ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="w2Wages" 
+                                placeholder="0" 
+                                min="0" 
+                                step="100"
+                                value="0"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE SELF-EMPLOYMENT TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">SELF-EMPLOYMENT TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">TOTAL SELF-EMPLOYMENT TAX</div>
+                        <div class="result-value" id="totalSETax">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">DEDUCTIBLE HALF OF SE TAX</div>
+                        <div class="result-value" id="deductibleSETax">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">BREAKDOWN</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Social Security (12.4%)</span>
+                            <span class="breakdown-value" id="seSocialSecurity">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Medicare (2.9%)</span>
+                            <span class="breakdown-value" id="seMedicare">$0.00</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Additional Medicare (0.9%)</span>
+                            <span class="breakdown-value" id="seAdditionalMedicare">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateSelfEmploymentTax() {
+            // Placeholder for self-employment tax calculation logic
+            const netEarnings = parseFloat(document.getElementById('netEarnings').value) || 0;
+            const w2Wages = parseFloat(document.getElementById('w2Wages').value) || 0;
+
+            // Mock calculations for demonstration
+            const seTaxRate = 0.153; // 15.3% for Social Security and Medicare
+            const totalSETax = netEarnings * 0.9235 * seTaxRate;
+            const deductibleSETax = totalSETax / 2;
+            const ssTax = totalSETax * (12.4 / 15.3);
+            const medicareTax = totalSETax * (2.9 / 15.3);
+
+            // Display mock results
+            displayResult('totalSETax', formatCurrency(totalSETax));
+            displayResult('deductibleSETax', formatCurrency(deductibleSETax));
+            displayResult('seSocialSecurity', formatCurrency(ssTax));
+            displayResult('seMedicare', formatCurrency(medicareTax));
+            displayResult('seAdditionalMedicare', formatCurrency(0.00)); // Placeholder
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateSelfEmploymentTax);
+
+        // Initial calculation
+        if (document.getElementById('netEarnings').value) {
+            calculateSelfEmploymentTax();
+        }
+    </script>
+</body>
+</html>
