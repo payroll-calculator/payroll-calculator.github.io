@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CBLE7QXF2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CBLE7QXF2');
+</script>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimated Tax Calculator - Calculate Quarterly Payments | Taxes Calculator</title>
+    <meta name="description" content="Free Estimated Tax calculator. Calculate quarterly estimated tax payments for self-employed individuals and those with significant unwithheld income.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/estimated-tax-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Estimated Tax Calculator",
+      "url": "https://payroll-calculator.github.io/estimated-tax-calculator.html",
+      "description": "Calculate quarterly estimated tax payments",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>Payroll Calculator</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">ESTIMATED TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Calculate quarterly estimated tax payments for self-employed individuals and those with unwithheld income.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="estimatedAnnualIncome">ESTIMATED ANNUAL TAXABLE INCOME ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="estimatedAnnualIncome" 
+                                placeholder="80000" 
+                                min="0" 
+                                step="1000"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="taxCredits">ESTIMATED TAX CREDITS ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="taxCredits" 
+                                placeholder="0" 
+                                min="0" 
+                                step="100"
+                                value="0"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="annualWithholding">TOTAL ANNUAL WITHHOLDING (W-2, etc.) ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="annualWithholding" 
+                                placeholder="10000" 
+                                min="0" 
+                                step="100"
+                                value="0"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE ESTIMATED TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">ESTIMATED TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">ESTIMATED ANNUAL TAX LIABILITY</div>
+                        <div class="result-value" id="annualLiability">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">REMAINDER TAX DUE</div>
+                        <div class="result-value" id="taxDue">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">QUARTERLY ESTIMATED PAYMENT</div>
+                        <div class="result-value" id="quarterlyPayment">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">QUARTERLY DUE DATES (US)</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Q1 (Jan 1 - Mar 31)</span>
+                            <span class="breakdown-value">April 15</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Q2 (Apr 1 - May 31)</span>
+                            <span class="breakdown-value">June 15</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Q3 (Jun 1 - Aug 31)</span>
+                            <span class="breakdown-value">Sept 15</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Q4 (Sept 1 - Dec 31)</span>
+                            <span class="breakdown-value">Jan 15 (next year)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateEstimatedTax() {
+            // Placeholder for estimated tax calculation logic
+            const estimatedAnnualIncome = parseFloat(document.getElementById('estimatedAnnualIncome').value) || 0;
+            const taxCredits = parseFloat(document.getElementById('taxCredits').value) || 0;
+            const annualWithholding = parseFloat(document.getElementById('annualWithholding').value) || 0;
+
+            // Mock calculations for demonstration (simplified tax rate)
+            const mockTaxRate = 0.22;
+            const annualLiability = (estimatedAnnualIncome * mockTaxRate) - taxCredits;
+            const taxDue = Math.max(0, annualLiability - annualWithholding);
+            const quarterlyPayment = taxDue / 4;
+
+            // Display mock results
+            displayResult('annualLiability', formatCurrency(annualLiability));
+            displayResult('taxDue', formatCurrency(taxDue));
+            displayResult('quarterlyPayment', formatCurrency(quarterlyPayment));
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateEstimatedTax);
+
+        // Initial calculation
+        if (document.getElementById('estimatedAnnualIncome').value) {
+            calculateEstimatedTax();
+        }
+    </script>
+</body>
+</html>
