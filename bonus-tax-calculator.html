@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CBLE7QXF2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3CBLE7QXF2');
+</script>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Tax Calculator - Estimate Supplemental Income Withholding | Taxes Calculator</title>
+    <meta name="description" content="Free Bonus Tax calculator. Estimate federal income tax withholding on bonus and supplemental income using the percentage or aggregate method.">
+    <link rel="canonical" href="https://payroll-calculator.github.io/bonus-tax-calculator.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23000' font-weight='900'%3E$%3C/text%3E%3C/svg%3E">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Bonus Tax Calculator",
+      "url": "https://payroll-calculator.github.io/bonus-tax-calculator.html",
+      "description": "Estimate tax on bonus and supplemental income",
+      "applicationCategory": "FinanceApplication"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-icon">☀️</span>
+    </button>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="var(--primary)"/>
+                        <text x="50" y="70" font-size="60" text-anchor="middle" fill="var(--background)" font-weight="900">$</text>
+                    </svg>
+                    <span>Payroll Calculator</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="calculator-page">
+        <div class="container">
+            <div class="calculator-header">
+                <h1 class="calculator-title">BONUS TAX CALCULATOR</h1>
+                <p class="calculator-description">
+                    Estimate the federal income tax withholding on a bonus or other supplemental wage payment.
+                </p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <form id="calculatorForm">
+                        <div class="form-group">
+                            <label class="form-label" for="bonusAmount">BONUS AMOUNT ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="bonusAmount" 
+                                placeholder="5000" 
+                                min="0" 
+                                step="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="withholdingMethod">WITHHOLDING METHOD</label>
+                            <select class="form-select" id="withholdingMethod" required>
+                                <option value="percentage">Percentage Method (Flat Rate)</option>
+                                <option value="aggregate" selected>Aggregate Method</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="regularPay">REGULAR PAYCHECK AMOUNT (FOR AGGREGATE METHOD) ($)</label>
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="regularPay" 
+                                placeholder="3000" 
+                                min="0" 
+                                step="100"
+                                value="3000"
+                            >
+                        </div>
+
+                        <button type="submit" class="calculate-btn">CALCULATE BONUS TAX</button>
+                    </form>
+                </div>
+
+                <div class="calculator-results" id="calculatorResults">
+                    <h2 class="results-title">BONUS TAX RESULTS</h2>
+                    
+                    <div class="result-item">
+                        <div class="result-label">FEDERAL INCOME TAX WITHHELD</div>
+                        <div class="result-value" id="federalTaxWithheld">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">SOCIAL SECURITY (6.2%)</div>
+                        <div class="result-value" id="ssTaxWithheld">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">MEDICARE (1.45%)</div>
+                        <div class="result-value" id="medicareTaxWithheld">$0.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">NET BONUS AFTER TAXES</div>
+                        <div class="result-value" id="netBonus">$0.00</div>
+                    </div>
+
+                    <div class="result-breakdown">
+                        <h3 style="margin-bottom: 20px; font-weight: 900;">WITHHOLDING SUMMARY</h3>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Withholding Method Used</span>
+                            <span class="breakdown-value" id="methodUsed">Aggregate</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Total Withheld Tax</span>
+                            <span class="breakdown-value" id="totalWithheld">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-widget">
+                    <h3 class="footer-title">ABOUT</h3>
+                    <p class="footer-text">
+                        Taxes Calculator provides free, accurate, and easy-to-use tax calculation tools for individuals and businesses.
+                    </p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">POPULAR CALCULATORS</h3>
+                    <ul class="footer-links">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="payroll-tax-calculator.html">Payroll Tax Calculator</a></li>
+                        <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
+                        <li><a href="property-tax-calculator.html">Property Tax Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3 class="footer-title">PAGES</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-use.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Taxes Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateBonusTax() {
+            // Placeholder for bonus tax calculation logic
+            const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
+            const regularPay = parseFloat(document.getElementById('regularPay').value) || 0;
+            const method = document.getElementById('withholdingMethod').value;
+
+            // FICA rates
+            const ssRate = 0.062;
+            const medicareRate = 0.0145;
+
+            // Mock calculations for demonstration
+            let federalTax = 0;
+            if (method === 'percentage') {
+                // Flat 22% rate for bonuses up to $1,000,000
+                federalTax = bonusAmount * 0.22;
+            } else {
+                // Simplified aggregate method - treat the bonus and regular pay as one large paycheck
+                // and calculate the federal withholding on the total, then subtract the regular withholding.
+                // This is a complex calculation in real-world, but here's a simplification:
+                const totalPay = bonusAmount + regularPay;
+                const totalTaxOnAggregate = totalPay * 0.20; // Simplified average tax rate for aggregate
+                const regularTax = regularPay * 0.15; // Simplified average tax rate for regular pay
+                federalTax = Math.max(0, totalTaxOnAggregate - regularTax);
+            }
+
+            const ssTax = bonusAmount * ssRate;
+            const medicareTax = bonusAmount * medicareRate;
+            const totalWithheld = federalTax + ssTax + medicareTax;
+            const netBonus = bonusAmount - totalWithheld;
+
+            // Display mock results
+            displayResult('federalTaxWithheld', formatCurrency(federalTax));
+            displayResult('ssTaxWithheld', formatCurrency(ssTax));
+            displayResult('medicareTaxWithheld', formatCurrency(medicareTax));
+            displayResult('netBonus', formatCurrency(netBonus));
+            displayResult('totalWithheld', formatCurrency(totalWithheld));
+            document.getElementById('methodUsed').textContent = method === 'percentage' ? 'Percentage (22% Flat)' : 'Aggregate (Simulated)';
+
+            showResults();
+        }
+
+        // Setup calculator
+        setupCalculator(calculateBonusTax);
+
+        // Initial calculation
+        if (document.getElementById('bonusAmount').value) {
+            calculateBonusTax();
+        }
+    </script>
+</body>
+</html>
